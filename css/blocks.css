@@ -1,0 +1,25 @@
+.block {
+    padding: 1em 0;
+
+    font-size: 16px;
+}
+
+.block__header {
+    font-size: 2.5em;
+}
+
+.block__single-demo {
+    padding: 0.5em 0;
+    page-break-inside: avoid;
+}
+
+.block__font-weight-name {
+    padding: 1em 0;
+
+    font-size: 1em;
+    font-weight: 700;
+}
+
+.block__demo-text {
+    font-size: 2em;
+}
