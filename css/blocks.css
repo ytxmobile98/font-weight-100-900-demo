@@ -10,6 +10,7 @@
 
 .block__single-demo {
     padding: 0.5em 0;
+    page-break-inside: avoid;
 }
 
 .block__font-weight-name {
