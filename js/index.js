@@ -21,18 +21,9 @@ const demoText = {
 };
 
 const fontFamiliesByGroup = [
-    [
-        'sans-serif',
-        ['sans-serif']
-    ],
-    [
-        'Noto Sans + sans-serif',
-        ['Noto Sans', 'sans-serif']
-    ],
-    [
-        'Noto Sans + Noto Sans CJK SC + sans-serif',
-        ['Noto Sans', 'Noto Sans CJK SC', 'sans-serif']
-    ],
+    ['sans-serif'],
+    ['Noto Sans', 'sans-serif'],
+    ['Noto Sans', 'Noto Sans CJK SC', 'sans-serif'],
 ]
 
 /**
@@ -42,16 +33,18 @@ const fontFamiliesByGroup = [
  */
 function renderSingleBlock(header, fontFamilies) {
     const blockText =
-        `<div class="block" style="font-family: ${fontFamilies.join(', ')}">
+        `<div class="block">
             <h1 class="block__header">${header}</h1>
-            ${Object.entries(fontWeights)
-                .map(([weight, name]) =>
-                    `<div class="block__single-demo">
-                        <p class="block__font-weight-name">${weight} ${name}</p>
-                        <p class="block__demo-text"
-                            style="font-weight: ${weight}">${demoText.English} ${demoText.Chinese}</p>
-                    </div>`)
-                .join('')}
+            <div class="block__demo-texts" style="font-family: ${fontFamilies.join(', ')}">
+                ${Object.entries(fontWeights)
+                    .map(([weight, name]) =>
+                        `<div class="block__single-demo">
+                            <p class="block__font-weight-name">${weight} ${name}</p>
+                            <p class="block__demo-text"
+                                style="font-weight: ${weight}">${demoText.English}<br/>${demoText.Chinese}</p>
+                        </div>`)
+                    .join('')}
+            </div>
          </div>`;
 
     const body = domParser.parseFromString(blockText, 'text/html').body;
@@ -64,7 +57,10 @@ function renderSingleBlock(header, fontFamilies) {
  */
 function renderAllBlocks(root) {
     const blocks = fontFamiliesByGroup.map(
-        ([header, fontFamilies]) => renderSingleBlock(header, fontFamilies)
+        families => {
+            const header = families.join(' + ');
+            return renderSingleBlock(header, families);
+        }
     );
 
     root.append(...blocks);
