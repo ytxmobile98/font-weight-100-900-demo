@@ -35,18 +35,18 @@ function renderSingleBlock(header, fontFamilies) {
     const blockText =
         `<div class="block">
             <h1 class="block__header">${header}</h1>
-            <div class="block__demo-texts">
+            <ul class="block__demo-texts">
                 ${Object.entries(fontWeights)
                     .map(([weight, name]) =>
-                        `<div class="block__single-demo">
+                        `<li class="block__single-demo">
                             <p class="block__font-weight-name">${weight} ${name}</p>
                             <p class="block__demo-text"
                                 style="font-family: ${fontFamilies.join(', ')};
                                     font-weight: ${weight};"
                                 >${demoText.English}<br/>${demoText.Chinese}</p>
-                        </div>`)
+                        </li>`)
                     .join('')}
-            </div>
+            </ul>
          </div>`;
 
     const body = domParser.parseFromString(blockText, 'text/html').body;
